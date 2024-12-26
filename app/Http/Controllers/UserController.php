@@ -22,6 +22,7 @@ class UserController extends Controller
         if(Auth::attempt(['phone' => $request->phone, 'password' => $request->password])){
             return redirect()->intended('ofer');
         }
+        return redirect()->back();
     }
 
     public function registterForm(){
@@ -54,7 +55,7 @@ class UserController extends Controller
 
 
         ]);
-        Auth::login($user);
+        Auth::login($user); //не нужна
         event(new Registered($user));
         return redirect('login');
     }
